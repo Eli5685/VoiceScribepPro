@@ -90,7 +90,7 @@ python audio_to_text.py
 ## ⚡ Ускорение на GPU
 
 Для использования GPU:
-1. Установите [CUDA Toolkit]([https://developer.nvidia.com/cuda-downloads](https://developer.nvidia.com/cuda-downloads))
+1. Установите [CUDA Toolkit](https://developer.nvidia.com/cuda-downloads)
 3. В настройках программы включите использование GPU
 
 ## 📝 Лицензия
