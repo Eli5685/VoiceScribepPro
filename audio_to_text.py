@@ -88,42 +88,42 @@ class AudioTranscriber(ctk.CTk):
         self.available_models = {
             "Tiny (быстрая, менее точная)": {
                 "name": "tiny",
-                "params": "39M",
+                "params": "78M",
                 "vram": "~1 GB",
                 "speed": "~10x быстрее large",
                 "installed": False
             },
             "Base (средняя)": {
                 "name": "base",
-                "params": "74M",
+                "params": "148M",
                 "vram": "~1 GB",
                 "speed": "~7x быстрее large",
                 "installed": False
             },
             "Small (точная)": {
                 "name": "small",
-                "params": "244M",
+                "params": "488M",
                 "vram": "~2 GB",
                 "speed": "~4x быстрее large",
                 "installed": False
             },
             "Medium (очень точная)": {
                 "name": "medium",
-                "params": "769M",
+                "params": "1538M",
                 "vram": "~5 GB",
                 "speed": "~2x быстрее large",
                 "installed": False
             },
             "Large (самая точная)": {
                 "name": "large-v3",
-                "params": "1550M",
+                "params": "3158M",
                 "vram": "~10 GB",
                 "speed": "базовая скорость",
                 "installed": False
             },
             "Turbo (быстрая и точная)": {
                 "name": "turbo",
-                "params": "809M",
+                "params": "1618M",
                 "vram": "~6 GB",
                 "speed": "~8x быстрее large",
                 "installed": False
@@ -1660,5 +1660,4 @@ class AudioTranscriber(ctk.CTk):
 
 if __name__ == "__main__":
     app = AudioTranscriber()
-    app.mainloop() 
-
+    app.mainloop()
