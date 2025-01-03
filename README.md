@@ -47,20 +47,22 @@ VoiceScribePro - это мощное приложение для преобра�
 1. Установите Python 3.11 с [официального сайта](https://www.python.org/downloads/)
 2. Клонируйте репозиторий:
 
-bash
-git clone https://github.com/your-repo/VoiceScribePro.git
+```bash
+git clone https://github.com/Eli5685/VoiceScribepPro.git
+```
 
 3. Установите зависимости:
 
-bash
+```bash
 cd VoiceScribePro
 pip install -r requirements.txt
+```
 
 4. Запустите приложение:
 
-bash
+```bash
 python audio_to_text.py
-
+```
 
 ## 🚀 Использование
 
