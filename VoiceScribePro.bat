@@ -2,45 +2,29 @@
 chcp 65001 > nul
 setlocal EnableDelayedExpansion
 
-echo.
-echo ===============================================
-echo           VoiceScribePro Launcher
-echo ===============================================
-echo.
-
-:: Set paths
+:: Application path in Documents
 set "APP_DIR=%USERPROFILE%\Documents\VoiceScribePro\app"
 set "PYTHON_PATH=C:\Users\%USERNAME%\AppData\Local\Programs\Python\Python311\python.exe"
 set "PIP_PATH=C:\Users\%USERNAME%\AppData\Local\Programs\Python\Python311\Scripts\pip3.11.exe"
 
-:: Check Python installation
-echo [*] Checking Python installation...
+:: Check Python 3.11
 if not exist "%PYTHON_PATH%" (
-    echo [!] Python 3.11 is not installed!
-    echo [i] Please install Python 3.11 from https://www.python.org/downloads/
-    echo [i] Make sure to select "Add Python 3.11 to PATH" during installation
-    echo.
+    echo Python 3.11 is not installed!
+    echo Please install Python 3.11 from https://www.python.org/downloads/
+    echo Make sure to select "Add Python 3.11 to PATH" during installation
     pause
     exit /b 1
 )
-echo [+] Python 3.11 found successfully
-echo.
 
-:: Create application directory
-echo [*] Checking application directory...
+:: Check application directory
 if not exist "%APP_DIR%" (
-    echo [*] Creating application directory...
+    echo Creating application directory...
     mkdir "%APP_DIR%"
-    echo [+] Directory created successfully
-) else (
-    echo [+] Directory already exists
 )
-echo.
 
-:: Create requirements.txt
-echo [*] Checking requirements file...
+:: Check requirements.txt
 if not exist "%APP_DIR%\requirements.txt" (
-    echo [*] Creating requirements.txt...
+    echo Creating requirements.txt...
     (
         echo customtkinter>=5.2.0
         echo sounddevice>=0.4.6
@@ -57,14 +41,10 @@ if not exist "%APP_DIR%\requirements.txt" (
         echo ctranslate2>=4.5.0
         echo huggingface-hub>=0.27.0
     ) > "%APP_DIR%\requirements.txt"
-    echo [+] Requirements file created
-) else (
-    echo [+] Requirements file exists
 )
-echo.
 
 :: Check installed packages
-echo [*] Checking installed packages...
+echo Checking installed packages...
 set "MISSING_PACKAGES="
 for %%p in (customtkinter sounddevice numpy scipy torch faster-whisper) do (
     "%PIP_PATH%" show "%%p" >nul 2>&1
@@ -75,44 +55,31 @@ for %%p in (customtkinter sounddevice numpy scipy torch faster-whisper) do (
 
 :: Install missing packages
 if not "!MISSING_PACKAGES!"=="" (
-    echo [!] Missing packages:!MISSING_PACKAGES!
-    echo [*] Installing dependencies...
+    echo Missing packages:!MISSING_PACKAGES!
+    echo Installing dependencies...
     "%PIP_PATH%" install -r "%APP_DIR%\requirements.txt"
     if errorlevel 1 (
-        echo [!] Error installing dependencies!
-        echo.
+        echo Error installing dependencies!
         pause
         exit /b 1
     )
-    echo [+] Dependencies installed successfully
 ) else (
-    echo [+] All required packages are installed
+    echo All required packages are already installed
 )
-echo.
 
-:: Copy application files
-echo [*] Checking application files...
+:: Copy application files if they don't exist
 if not exist "%APP_DIR%\audio_to_text.py" (
-    echo [*] Copying application files...
-    copy "%~dp0audio_to_text.py" "%APP_DIR%\" >nul
-    copy "%~dp0app.ico" "%APP_DIR%\" >nul
-    echo [+] Files copied successfully
-) else (
-    echo [+] Application files exist
+    echo Copying application files...
+    copy "%~dp0audio_to_text.py" "%APP_DIR%\"
+    copy "%~dp0app.ico" "%APP_DIR%\"
 )
-echo.
 
 :: Launch application
-echo ===============================================
-echo [*] Launching VoiceScribePro...
-echo ===============================================
-echo.
+echo Launching VoiceScribePro...
 cd /d "%APP_DIR%"
 "%PYTHON_PATH%" audio_to_text.py
 if errorlevel 1 (
-    echo.
-    echo [!] An error occurred while running the application!
-    echo.
+    echo An error occurred while running the application!
     pause
 )
 
